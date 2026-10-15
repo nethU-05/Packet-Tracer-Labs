@@ -68,12 +68,10 @@ A successful login drops you at the HQ router CLI prompt.
 └── <activity-file>.pka     # Packet Tracer activity file
 ```
 
-## Author
+Author
+Nethmini Umendra
 
-Your Name
-
-## Acknowledgements
-
+Acknowledgements
 Activity based on Cisco Networking Academy Packet Tracer materials.
 
 License
