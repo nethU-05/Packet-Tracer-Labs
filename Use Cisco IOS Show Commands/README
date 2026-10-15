@@ -1,0 +1,105 @@
+# Packet Tracer Lab: Use the Cisco IOS Show Commands
+
+A Cisco Packet Tracer activity that practices the Cisco IOS `show` commands on a router located at an ISP. These commands are used extensively when working with Cisco equipment to inspect a device's configuration and status.
+
+## Objective
+
+Use the Cisco IOS `show` commands.
+
+## Background / Scenario
+
+The Cisco IOS `show` commands are used extensively when working with Cisco equipment. In this activity you use the `show` commands on a Cisco 4321 router located at an ISP.
+
+## Topology
+
+| Device | Role |
+|---|---|
+| ISP Router | Cisco 4321 router being inspected |
+| ISP PC | Management PC; connects to the router with the terminal emulator |
+| Switch0 | Connects the router, ISP PC, and ISP Server |
+| ISP Server | Server on the ISP network |
+
+## Requirements
+
+- Cisco Packet Tracer
+- `Use Cisco IOS Show Commands.pka` (in this repository)
+
+## Lab Walkthrough
+
+### Part 1: Connect to the ISP Cisco 4321 router
+1. Click **ISP PC**.
+2. Click the **Desktop** tab and select **Terminal**. Review the terminal configuration and click **OK**.
+3. The `ISPRouter>` prompt indicates you are in User EXEC mode. Press Enter if the prompt does not appear.
+
+### Part 2: Explore the show commands
+
+**Step 1: Explore show commands in User EXEC mode**
+
+| Command | What to look for |
+|---|---|
+| `show ?` | List a few more `show` commands available in User EXEC mode |
+| `show arp` | Record the MAC address and IP address listed |
+| `show flash` | Record the IOS image listed |
+| `show ip route` | Count how many routes are in the table |
+| `show interfaces` | Find which interface is up and running, and fill in the status/protocol table below |
+| `show ip interface` | Identify which interface is connected |
+| `show version` | Find which technology package is currently enabled |
+| `show protocols` | See which protocols are currently enabled |
+| `show running-config` | Observe the output (it is not available in User EXEC mode) |
+
+Interface status table to complete from `show interfaces`:
+
+| Interface | Status | Protocol |
+|---|---|---|
+| GigabitEthernet 0/0/0 | Up | |
+| GigabitEthernet 0/0/1 | | Down |
+| Serial0/1/0 | | |
+| Serial0/1/1 | Down | |
+
+**Step 2: Explore the show commands in privileged EXEC mode**
+1. Enter privileged EXEC mode:
+   ```
+   ISPRouter> enable
+   ```
+2. List some additional `show` commands available in this mode:
+   ```
+   ISPRouter# show ?
+   ```
+3. Display the active configuration:
+   ```
+   ISPRouter# show running-config
+   ```
+
+## Command Summary
+
+| Command | Purpose |
+|---|---|
+| `show arp` | Display the ARP table (IP to MAC mappings) |
+| `show flash` | Display the contents of flash memory, including the IOS image |
+| `show ip route` | Display the routing table |
+| `show interfaces` | Display detailed status and statistics for each interface |
+| `show ip interface` | Display IP configuration and status of interfaces |
+| `show version` | Display IOS version, uptime, hardware, and enabled technology package |
+| `show protocols` | Display the protocols enabled on each interface |
+| `show running-config` | Display the current configuration in RAM (privileged EXEC) |
+
+## Key Takeaways
+
+- `show` commands are read-only: they report device state without changing it.
+- Some `show` commands, such as `show running-config`, require privileged EXEC mode.
+- `show interfaces` and `show ip interface` reveal whether an interface is up and which one is connected, which is a first step in troubleshooting.
+- `show version` and `show flash` identify the IOS image and enabled features.
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── Use Cisco IOS Show Commands.pka
+```
+
+Author
+Nethmini Umendra
+
+Acknowledgements
+Activity based on Cisco Networking Academy Packet Tracer materials.
