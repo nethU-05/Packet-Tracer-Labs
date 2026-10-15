@@ -11,7 +11,7 @@ This repository contains the Cisco Packet Tracer activities I have completed. Fo
    - 05 - Use FTP Services
    - 06 - The Client Interaction
    - 07 - Connect to a Web Server
-   - 08 - Create a Simple Networ
+   - 08 - Use the ipconfig Command
    - 09 -
    - 10 -
    - 11 -
