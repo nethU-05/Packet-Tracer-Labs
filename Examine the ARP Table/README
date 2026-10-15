@@ -1,0 +1,112 @@
+# Packet Tracer Lab: Examine the ARP Table
+
+A Cisco Packet Tracer activity that uses Simulation mode to examine ARP requests, switch MAC address tables, and the ARP process for remote (off-network) communications.
+
+## Objectives
+
+- **Part 1:** Examine an ARP request
+- **Part 2:** Examine a switch MAC address table
+- **Part 3:** Examine the ARP process in remote communications
+
+## Background
+
+The devices are already configured. You gather PDU information in Simulation mode and answer a series of questions about the data you collect.
+
+## Topology
+
+- **Left network (10.10.10.0):** Router0 > Switch0 > Access Point > two wireless laptops (10.10.10.2 and 10.10.10.3)
+- **Right network (172.16.31.0):** Router1 > Switch1 > three PCs (172.16.31.2, 172.16.31.3, 172.16.31.4)
+- Router0 and Router1 are linked by a serial connection.
+
+## Addressing Table
+
+| Device | Interface | MAC Address | Switch Interface |
+|---|---|---|---|
+| Router0 | G0/0 | 0001.6458.2501 | G0/1 |
+| Router0 | S0/0/0 | N/A | N/A |
+| Router1 | G0/0 | 00E0.F7B1.8901 | G0/1 |
+| Router1 | S0/0/0 | N/A | N/A |
+| 10.10.10.2 | Wireless | 0060.2F84.4AB6 | F0/2 |
+| 10.10.10.3 | Wireless | 0060.4706.572B | F0/2 |
+| 172.16.31.2 | F0 | 000C.85CC.1DA7 | F0/1 |
+| 172.16.31.3 | F0 | 0060.7036.2849 | F0/2 |
+| 172.16.31.4 | G0 | 0002.1640.8D75 | F0/3 |
+
+## Requirements
+
+- Cisco Packet Tracer
+- `Examine the ARP Table.pka` (in this repository)
+
+## Lab Walkthrough
+
+### Part 1: Examine an ARP request
+
+**Step 1: Generate ARP requests by pinging 172.16.31.3 from 172.16.31.2**
+1. Click **172.16.31.2** and open the **Command Prompt**.
+2. Clear the ARP table:
+   ```
+   PC> arp -d
+   ```
+3. Enter **Simulation** mode and run `ping 172.16.31.3`. Two PDUs are generated: the ping cannot complete without the destination MAC address, so the computer first sends an ARP broadcast.
+4. Click **Capture/Forward** once. The ARP PDU moves to Switch1 while the ICMP PDU waits for the ARP reply. Open the PDU and record the destination MAC address, then check whether it appears in the addressing table.
+5. Continue with **Capture/Forward** and note how many copies of the PDU Switch1 makes, which device accepts the PDU, and what happens to the source and destination MAC addresses at Layer 2.
+6. Keep stepping until the PDU returns to 172.16.31.2, and note how many copies the switch makes during the ARP reply.
+
+**Step 2: Examine the ARP table**
+1. Note that the ICMP packet reappears. Open the PDU and compare the MAC and IP addresses of the source and destination.
+2. Switch back to **Realtime** so the ping completes.
+3. On 172.16.31.2, run:
+   ```
+   PC> arp -a
+   ```
+   Identify which IP address the MAC address entry corresponds to, and when an end device issues an ARP request.
+
+### Part 2: Examine a switch MAC address table
+
+**Step 1: Generate additional traffic to populate the switch MAC address tables**
+1. From 172.16.31.2, run `ping 172.16.31.4`.
+2. On 10.10.10.2, open the **Command Prompt** and run `ping 10.10.10.3`. Note how many replies were sent and received.
+
+**Step 2: Examine the MAC address table on the switches**
+1. Click **Switch1** > **CLI** tab and run:
+   ```
+   Switch> show mac-address-table
+   ```
+2. Click **Switch0** > **CLI** tab and run the same command.
+3. Compare the entries with the addressing table, and explain why two MAC addresses are associated with one port (the access point port).
+
+### Part 3: Examine the ARP process in remote communications
+
+**Step 1: Generate traffic to produce ARP traffic**
+1. On 172.16.31.2, open the **Command Prompt** and run `ping 10.10.10.1`.
+2. Run `arp -a` and note the IP address of the new ARP table entry.
+3. Run `arp -d` to clear the table, switch to **Simulation** mode, and repeat the ping to `10.10.10.1`. Note how many PDUs appear.
+4. Click **Capture/Forward**, then click the PDU now at Switch1. Note the target IP address of the ARP request, and why it is not 10.10.10.1 (the destination is on a different network, so the host ARPs for its default gateway instead).
+
+**Step 2: Examine the ARP table on Router1**
+1. Switch to **Realtime** mode. Click **Router1** > **CLI** tab.
+2. Enter privileged EXEC mode and run `show mac-address-table`. Note how many MAC addresses are listed and why.
+3. Run `show arp` and check for an entry for 172.16.31.2.
+4. Consider what happens to the first ping when the router has to respond to an ARP request.
+
+## Key Takeaways
+
+- ARP maps a known IPv4 address to the MAC address needed to send frames on the local network.
+- A host sends an ARP broadcast when it does not yet have the destination's MAC address in its ARP table.
+- Switches learn MAC addresses from the source address of incoming frames and forward frames out only the matching port.
+- For traffic to a remote network, a host ARPs for its **default gateway**, not for the final destination.
+- The first ping in a sequence often times out because ARP resolution takes place before the ICMP packet can be sent.
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── Examine the ARP Table.pka
+```
+
+Author
+Nethmini Umendra
+
+Acknowledgements
+Activity based on Cisco Networking Academy Packet Tracer materials.
