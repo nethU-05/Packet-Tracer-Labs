@@ -1,1 +1,77 @@
+# Packet Tracer Lab: Use Telnet and SSH
 
+A Cisco Packet Tracer activity that establishes a remote connection to a router using Telnet and SSH, showing why SSH is required when Telnet access is disabled.
+
+## Objectives
+
+- Verify connectivity.
+- Access a remote device.
+
+## Addressing Table
+
+| Device | Interface | IP Address | Subnet Mask |
+|---|---|---|---|
+| HQ | G0/0/1 | 64.100.1.1 | 255.255.255.0 |
+| PC0 | NIC | DHCP | DHCP |
+| PC1 | NIC | DHCP | DHCP |
+
+## Requirements
+
+- Cisco Packet Tracer
+- The activity file in this repository
+- Router credentials: username `admin`, password `class`
+
+## Lab Walkthrough
+
+### Part 1: Verify connectivity
+
+**Step 1: Verify the IP address on a PC**
+1. On a PC, click **Desktop** > **Command Prompt**.
+2. Verify that the PC received an IP address from DHCP:
+   ```
+   C:\> ipconfig
+   ```
+
+**Step 2: Verify connectivity to HQ**
+Ping the router `HQ` using the IP address in the addressing table:
+```
+C:\> ping 64.100.1.1
+```
+
+### Part 2: Access a remote device
+
+**Step 1: Telnet to HQ**
+```
+C:\> telnet 64.100.1.1
+```
+The router is configured to refuse insecure Telnet access, so this attempt is expected to fail.
+
+**Step 2: SSH to HQ**
+Connect with SSH, using username `admin` and entering the password `class` when prompted:
+```
+C:\> ssh -l admin 64.100.1.1
+Password:
+```
+A successful login drops you at the HQ router CLI prompt.
+
+## Key Takeaways
+
+- Telnet sends data, including passwords, in clear text, so the router is configured to reject it.
+- SSH encrypts the session and is the secure way to manage a remote device.
+- Always verify IP addressing and reachability (`ipconfig`, `ping`) before troubleshooting remote access.
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── <activity-file>.pka     # Packet Tracer activity file
+```
+
+## Author
+
+Your Name
+
+## Acknowledgements
+
+Activity based on Cisco Networking Academy Packet Tracer materials.
