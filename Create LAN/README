@@ -108,6 +108,13 @@ Requirements
 Cisco Packet Tracer
 The activity file (.pka / .pkt) included in this repository
 
+## Repository Structure
+
+```
+.
+├── Create a LAN.pka
+└── README.md
+
 Author 
 Nethmini Umendra
 
