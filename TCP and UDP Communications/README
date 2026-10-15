@@ -1,0 +1,145 @@
+# Packet Tracer Lab: TCP and UDP Communications
+
+A Cisco Packet Tracer activity that uses Simulation mode to generate network traffic from several client applications and examine how the TCP and UDP protocols work, including multiplexing and the role of port numbers.
+
+## Objectives
+
+- **Part 1:** Generate network traffic in Simulation mode
+- **Part 2:** Examine the functionality of the TCP and UDP protocols
+
+## Background
+
+This simulation activity provides a foundation for understanding TCP and UDP in detail. Packet Tracer Simulation mode lets you view each protocol and its associated PDUs as they travel through the network. You request network services using various client applications, then explore how TCP and UDP work, how multiplexing works, and how port numbers determine which local application requested or is sending the data.
+
+Packet Tracer does not score this activity.
+
+## Topology
+
+A star network built around one switch:
+
+| Device | Role | Address |
+|---|---|---|
+| MultiServer (`multiserver.pt.ptu`) | HTTP, FTP, DNS, and email server | 192.168.1.254 |
+| HTTP Client | Web browser client | n/a |
+| FTP Client | FTP client | n/a |
+| DNS Client | DNS lookup client | n/a |
+| E-Mail Client | Email client | n/a |
+| Switch | Connects the clients and the server | n/a |
+
+## Requirements
+
+- Cisco Packet Tracer
+- `TCP and UDP Communications.pka` (in this repository)
+
+## Lab Walkthrough
+
+### Part 1: Generate network traffic in Simulation mode and view multiplexing
+
+**Step 1: Generate traffic to populate ARP tables**
+1. Click **MultiServer** > **Desktop** > **Command Prompt**.
+2. Ping the broadcast address once so every device populates its ARP table:
+   ```
+   C:\> ping -n 1 192.168.1.255
+   ```
+3. Close the MultiServer window.
+
+**Step 2: Generate web (HTTP) traffic**
+1. Switch to **Simulation** mode.
+2. Click **HTTP Client** > **Desktop** > **Web Browser**.
+3. Enter `192.168.1.254` in the URL field and click **Go**.
+4. Minimize (do not close) the HTTP Client window.
+
+**Step 3: Generate FTP traffic**
+1. Click **FTP Client** > **Command Prompt**.
+2. Enter:
+   ```
+   C:\> ftp 192.168.1.254
+   ```
+3. Minimize (do not close) the FTP Client window.
+
+**Step 4: Generate DNS traffic**
+1. Click **DNS Client** > **Command Prompt**.
+2. Enter:
+   ```
+   C:\> nslookup multiserver.pt.ptu
+   ```
+3. Minimize (do not close) the DNS Client window.
+
+**Step 5: Generate email traffic**
+1. Click **E-Mail Client** > **E Mail** tool.
+2. Click **Compose** and enter:
+   - **To:** `user@multiserver.pt.ptu`
+   - **Subject:** your own subject line
+   - **Body:** your own message
+3. Click **Send**, then minimize the E-Mail Client window.
+
+**Step 6: Verify the traffic is ready for simulation**
+PDU entries should now appear in the Simulation Panel for each of the client computers.
+
+**Step 7: Examine multiplexing as the traffic crosses the network**
+1. Click **Capture/Forward** once. All of the PDUs travel to the switch.
+2. Click **Capture/Forward** six more times and watch the PDUs from the different hosts. Only one PDU can cross a wire in each direction at any given time.
+3. Note what this is called and what the different PDU colors in the Event List mean.
+
+### Part 2: Examine the functionality of the TCP and UDP protocols
+
+**Step 1: Examine HTTP traffic**
+1. Click **Reset Simulation**.
+2. Use **Edit Filters** to show only **HTTP** and **TCP** PDUs.
+3. Open the browser on HTTP Client, enter `192.168.1.254`, and click **Go**.
+4. Use **Capture/Forward** until an HTTP PDU appears, then open the PDU and check the **Outbound PDU Details** tab (TCP section). Record the **SRC PORT**, **DEST PORT**, **SEQUENCE NUM**, and **ACK NUM**.
+5. Read the **Flags** field. Each of the six places is a TCP flag (URG, ACK, PSH, RST, SYN, FIN); a `1` means the flag is set.
+
+   | Flag Place | 6 | 5 | 4 | 3 | 2 | 1 |
+   |---|---|---|---|---|---|---|
+   | Value | URG | ACK | PSH | RST | SYN | FIN |
+
+6. Continue until a PDU with a checkmark returns to HTTP Client and compare its **Inbound PDU Details** with the outbound ones.
+7. Open the HTTP PDU that HTTP Client prepared for MultiServer (the start of the HTTP communication) and compare its ports and sequence numbers with the previous two PDUs.
+8. Reset the simulation.
+
+**Step 2: Examine FTP traffic**
+1. On FTP Client, run `ftp 192.168.1.254`.
+2. Change **Edit Filters** to show only **FTP** and **TCP**.
+3. Click **Capture/Forward** and open the second PDU. Check the TCP section and record the ports, sequence number, ACK number, and flag value.
+4. Continue until a PDU returns to FTP Client, comparing the inbound and outbound details each time.
+5. When a second PDU of a different color returns, open **Inbound PDU Details** and scroll past the TCP section to read the message from the server.
+6. Reset the simulation.
+
+**Step 3: Examine DNS traffic**
+1. Repeat the Part 1 steps to create DNS traffic.
+2. Change **Edit Filters** to show only **DNS** and **UDP**.
+3. Open the PDU and review the OSI model details for the outbound PDU, including the Layer 4 protocol.
+4. In **Outbound PDU Details**, find the UDP section and record the **SRC PORT** and **DEST PORT**.
+5. Continue until a PDU returns to DNS Client, then open **Inbound PDU Details**. Note the last section of the PDU and the IP address returned for `multiserver.pt.ptu`.
+6. Reset the simulation.
+
+**Step 4: Examine email traffic**
+1. Repeat the Part 1 steps to send an email to `user@multiserver.pt.ptu`.
+2. Change **Edit Filters** to show only **POP3**, **SMTP**, and **TCP**.
+3. Open the first PDU and check the TCP section of **Outbound PDU Details**. Record the ports, sequence and ACK numbers, and flag value.
+4. Continue until a PDU returns to E-Mail Client, comparing inbound and outbound details.
+5. Open the second PDU of a different color that E-Mail Client prepared for MultiServer and compare its port and sequence numbers with the previous PDUs.
+6. Note which email protocol is associated with TCP port 25 and which with TCP port 110.
+
+## Key Takeaways
+
+- **TCP** is connection-oriented and reliable: it uses source and destination ports, sequence numbers, acknowledgement numbers, and flags (such as SYN and ACK) to set up connections and confirm delivery.
+- **UDP** is connectionless and unreliable, with no sequence or acknowledgement numbers, which suits quick lookups like DNS.
+- HTTP, FTP, and email run over TCP, while DNS queries run over UDP.
+- Port numbers identify which application a segment belongs to, which is what allows multiplexing of many conversations over one network connection.
+- Well-known ports include 25 (SMTP) and 110 (POP3).
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── TCP and UDP Communications.pka
+```
+
+## Author
+Nethmini Umendra
+
+## Acknowledgements
+Activity based on Cisco Networking Academy Packet Tracer materials.
