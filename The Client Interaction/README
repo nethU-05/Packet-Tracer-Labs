@@ -72,12 +72,10 @@ The Event List Filters now show only DNS and HTTP events.
 └── <activity-file>.pka     # Packet Tracer activity file
 ```
 
-## Author
-
+Author
 Nethmini Umendra
 
-## Acknowledgements
-
+Acknowledgements
 Activity based on Cisco Networking Academy Packet Tracer materials.
 
 License
