@@ -56,14 +56,14 @@ Observe how packets are sent across the Internet using IP addresses.
 
 ```
 .
-├── README.md
-└── <activity-file>.pka     # Packet Tracer activity file
+├── <activity-file>.pka     # Packet Tracer activity file
+└── README.md
 ```
 
-## Author
+Author
 Nethmini Umendra
 
-## Acknowledgements
+Acknowledgements
 Activity based on Cisco Networking Academy Packet Tracer materials.
 
 License
