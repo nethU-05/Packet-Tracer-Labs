@@ -5,3 +5,4 @@ My Cisco Packet Tracer networking and security labs.
    - 02 - Identity MAC and IP Addresses
    - 03 - Use Talnet and SSH
    - 04 - Create LAN
+   - 05 - Observe Web Requests
