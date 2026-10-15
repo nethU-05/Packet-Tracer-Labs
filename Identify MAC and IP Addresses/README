@@ -1,1 +1,85 @@
+Packet Tracer – Identify MAC and IP Addresses
 
+A Cisco Packet Tracer activity that investigates how Layer 2 (MAC) and Layer 3 (IPv4) addresses behave as PDUs travel across a local network and across a remote network through a router.
+
+Activity file: Identify MAC and IP Addresses.pka
+Tool: Cisco Packet Tracer (Simulation mode)
+Configuration required: None – the activity is observation only
+
+Objectives
+Part 1 – Gather PDU information for a local network communication
+Part 2 – Gather PDU information for a remote network communication
+
+Background
+Normal network communication involves Ethernet frames and IP packets. As a PDU moves from source to destination, the MAC addresses change at each hop (they only have local significance), while the IP addresses stay the same end to end. Packet Tracer's Simulation mode lets you capture a PDU at each device and inspect it in the OSI Model and Outbound PDU Details tabs.
+
+Part 1 – Local Network Communication
+A host on the same local network does not need a default gateway.
+
+Steps performed
+Opened host 172.16.31.3 → Command Prompt.
+Ran ping 172.16.31.2 in Realtime mode.
+Switched to Simulation mode and repeated the ping.
+Clicked the PDU envelope and inspected the OSI Model / Outbound PDU Details tabs.
+Used Capture / Forward to step through each device and recorded the results.
+Returned to Realtime mode.
+
+Data captured (at 172.16.31.3, outbound ICMP echo request)
+
+At Device	Src MAC	Dest. MAC	Src IPv4	Dest IPv4
+172.16.31.3	0060.7036.2849	000C:85CC:1DA7	172.16.31.3	172.16.31.2
+
+Observation: The inbound PDU information is unchanged; since source and destination are on the same network, the destination MAC is that of the destination host itself.
+
+Part 2 – Remote Network Communication
+
+A gateway (router) is required to reach a device on a different network.
+
+Steps performed
+
+Returned to the Command Prompt on 172.16.31.3.
+Ran ping 10.10.10.2 (the first few pings may time out while ARP resolves).
+Switched to Simulation mode and repeated the ping.
+Inspected the PDU:
+Field	Value
+At Device	172.16.31.3
+Source MAC	0060.7036.2849
+Destination MAC	00D0:BA8E:741A
+Source IP	172.16.31.3
+Destination IP	10.10.10.2
+
+Key point: The destination MAC (00D0:BA8E:741A) belongs to the router's interface (default gateway), not to the final destination host – while the destination IP remains 10.10.10.2.
+
+Used Capture / Forward to follow the echo request hop by hop, then repeated for the echo reply from 10.10.10.2, recording inbound and outbound PDUs at the router.
+
+Sample table – echo request
+
+At Device	Src MAC	Dest. MAC	Src IPv4	Dest IPv4
+172.16.31.3	00D0:D311:C788	00D0:BA8E:741A	172.16.31.3	10.10.10.2
+(add remaining hops)				
+
+Echo reply table – recorded the same way, hop by hop, starting from 10.10.10.2.
+
+
+Key Takeaways
+MAC addresses change at every Layer 2 hop (host → router → next network).
+IP addresses remain the same from original source to final destination.
+For local traffic, the destination MAC is the target host; for remote traffic, it is the default gateway's MAC.
+Simulation mode is a powerful way to see encapsulation and addressing at each step.
+
+How to Open This Activity
+Install Cisco Packet Tracer.
+Open Identify MAC and IP Addresses.pka.
+Follow the instructions panel, using Simulation mode for the capture steps.
+
+Repository Structure
+.
+├── Identify MAC and IP Addresses.pka   # Packet Tracer activity file
+├── README.md                           # This file
+└── screenshots/                        # (optional) screenshots of captured PDUs
+
+Author
+Nethmini Umendra – Networking coursework / lab practice
+
+License
+This repository is for educational purposes. Packet Tracer and the original activity are property of Cisco Systems, Inc.
