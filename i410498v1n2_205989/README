@@ -50,11 +50,10 @@ PC0 --- Switch0 (2950-24) --- Router0 (1841) --- Switch1 (2950-24) --- PC1
 └── Identify MAC and IP Addresses.pka
 ```
 
-## Author
-
+Author
 Nethmini Umendra
 
-## Acknowledgements
+Acknowledgements
 Activity based on Cisco Networking Academy Packet Tracer materials.
 
 License
