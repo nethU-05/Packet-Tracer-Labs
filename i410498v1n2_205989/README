@@ -55,5 +55,7 @@ PC0 --- Switch0 (2950-24) --- Router0 (1841) --- Switch1 (2950-24) --- PC1
 Nethmini Umendra
 
 ## Acknowledgements
-
 Activity based on Cisco Networking Academy Packet Tracer materials.
+
+License
+This repository is for educational purposes. Packet Tracer and the original activity are property of Cisco Systems, Inc.
