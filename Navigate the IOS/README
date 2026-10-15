@@ -139,8 +139,11 @@ S1# clock set 15:00:00 32
 └── Navigate the IOS.pka
 ```
 
-## Author
+Author
 Nethmini Umendra
 
-## Acknowledgements
+Acknowledgements
 Activity based on Cisco Networking Academy Packet Tracer materials.
+
+License
+This repository is for educational purposes. Packet Tracer and the original activity are property of Cisco Systems, Inc.
