@@ -91,12 +91,10 @@ Run `dir` on the PC to confirm the downloaded file is in the directory.
 └── <activity-file>.pka     # Packet Tracer activity file
 ```
 
-## Author
-
+Author
 Nethmini Umendra
 
-## Acknowledgements
-
+Acknowledgements
 Activity based on Cisco Networking Academy Packet Tracer materials.
 
 License
