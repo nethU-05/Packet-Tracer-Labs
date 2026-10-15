@@ -1,1 +1,109 @@
+Packet Tracer - Create a LAN
 
+A Cisco Packet Tracer activity in which a new branch office LAN is built from scratch: connecting devices, configuring IPv4 addressing, and verifying connectivity with common networking commands.
+
+Table of Contents
+Objectives
+Scenario
+Topology and Addressing
+Instructions
+Verification
+Reflection
+Requirements
+Objectives
+Connect network devices and hosts
+Configure devices with IPv4 addressing
+Verify the end device configuration and connectivity
+Use networking commands to view host information
+Scenario
+
+A new branch office is opening, and you have been asked to set up the LAN. The network devices are already set up, but you need to connect them and the hosts together. You also need to configure IPv4 addressing on the end devices and verify that they can reach local and remote resources.
+
+Topology and Addressing
+Addressing Table
+
+Device	Interface/Port	IPv4 Address	Subnet Mask
+Admin PC	NIC	DHCP	N/A
+Manager PC	NIC	DHCP	N/A
+Printer	NIC	192.168.1.100	255.255.255.0
+www.cisco.pt	NIC	209.165.200.225	N/A
+
+Connections Table
+Device	Interface/Port	Connected to Device	Connection Interface/Port
+Office Router	G0/0	ISP1	G0/0
+Office Router	G0/1	Switch	G0/1
+Admin PC	NIC (F/0)	Switch	F0/1
+Manager PC	NIC (F/0)	Switch	F0/2
+Printer	NIC (F/0)	Switch	F0/24
+
+Note: Interfaces designated with G are GigabitEthernet interfaces. Interfaces designated with F are FastEthernet interfaces.
+
+Instructions
+Part 1: Connect Network Devices and Hosts
+Step 1: Power on the end devices and Office Router
+
+Click each device and open its Physical tab. (There is no power switch on the switch model used in this activity.)
+Locate the power switch for each device in the Physical Device View window.
+Click the power switch to turn the device on. A green light near the power switch indicates the device is powered on.
+
+Step 2: Connect the end devices
+
+Connect the networking devices according to the Connections Table using Ethernet copper straight-through cables. For the internet-to-Office Router connection, select the device and port from the dropdown menus that appear when you click the cloud with connections tool.
+Connect the two PCs and the printer to the office switch according to the Connections Table, using copper straight-through cables.
+Green link lights should appear on all connections after a brief delay.
+
+Part 2: Configure Devices with IPv4 Addressing
+Step 1: Configure the hosts with addressing information
+
+Admin PC and Manager PC (DHCP): The Office Router is configured to supply IP addressing to hosts on the branch office LAN. On each PC, go to the Desktop tab, open IP Configuration, and configure the PC to receive its addressing dynamically.
+Printer (static): Printers and servers are often manually configured with a static address so their IP addresses do not change.
+Click the printer and open the Config tab.
+Click the FastEthernet0 interface in the left-hand pane.
+Enter the addressing information from the Addressing Table.
+Questions to consider:
+Why are the IPv4 addresses different, but the subnet masks and default gateways the same, on the two PCs?
+The printer does not require a default gateway because it is only accessed by local hosts. If it did need one, which value would it use, and how can you determine this from the other devices?
+
+Part 3: Verify the End Device Configuration and Connectivity
+Step 1: Verify connectivity between the two PCs
+
+On the desktops of the PCs, check the IP configuration. They should have dynamically received addresses on the 192.168.1.0 / 255.255.255.0 network, along with Default Gateway and DNS server settings.
+From the command prompt on Admin PC, ping the printer's IP address. Repeat for the Manager PC. Successful pings verify the PCs and printer are powered on, correctly connected, and correctly addressed.
+
+Step 2: Verify connectivity to the internet
+
+From the desktop of the PCs, open the Web Browser. Enter the IP address of the internet server to display the webpage. Repeat the process using the server's URL.
+
+If you can connect by IP address but not by URL, what do you think is the cause?
+
+Part 4: Use Networking Commands to View Host Information
+Step 1: Use the ipconfig command
+
+ipconfig displays details about the addressing configured on a host. Open a command prompt on one of the PCs, run ipconfig, and note the output. Then run ipconfig /all.
+
+What additional information is displayed?
+
+Step 2: Use the tracert command
+
+tracert uses ICMP to return information about the routers passed as packets travel from the source PC to the destination. From one of the PCs, run tracert followed by the URL of the web server.
+
+How many routers are passed on the way to the destination? How are they identified? Where is the second router located?
+
+Verification
+
+Use the Check Results button in Packet Tracer to confirm completion (target: 100%).
+
+Check	Command / Action	Expected Result
+Link lights	Visual check	Green on all connections
+PC addressing	ipconfig	192.168.1.x / 255.255.255.0 via DHCP
+Local connectivity	ping 192.168.1.100	Successful replies
+Internet by IP	Browse to 209.165.200.225	Webpage loads
+Internet by URL	Browse to www.cisco.pt	Webpage loads
+Path to server	tracert www.cisco.pt	Lists routers along the path
+
+Reflection
+Consider a small office with a LAN similar to this one. What is the biggest facilities challenge in setting up the network in a new location?
+
+Requirements
+Cisco Packet Tracer
+The activity file (.pka / .pkt) included in this repository
