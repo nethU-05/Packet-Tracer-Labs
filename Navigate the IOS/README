@@ -1,0 +1,146 @@
+# Packet Tracer Lab: Navigate the IOS
+
+A Cisco Packet Tracer activity that practices the skills needed to navigate the Cisco IOS: user access modes, configuration modes, context-sensitive help, and everyday commands. The `clock` command is used to explore how IOS help and error messages work.
+
+## Objectives
+
+- **Part 1:** Establish basic connections, access the CLI, and explore Help
+- **Part 2:** Explore EXEC modes
+- **Part 3:** Set the clock
+
+## Background / Scenario
+
+In this activity you practice navigating the Cisco IOS, including the different user access modes, the various configuration modes, and commonly used commands. You also practice using context-sensitive Help by configuring the `clock` command.
+
+## Topology
+
+| Device | Role |
+|---|---|
+| PC1 | Management PC used to reach the switch CLI |
+| S1 | Cisco switch being configured |
+
+PC1 connects to S1 with a console cable (PC1 RS-232 port to S1 Console port).
+
+## Requirements
+
+- Cisco Packet Tracer
+- `Navigate the IOS.pka` (in this repository)
+
+## Lab Walkthrough
+
+### Part 1: Establish basic connections, access the CLI, and explore Help
+
+**Step 1: Connect PC1 to S1 using a console cable**
+1. Click the **Connections** icon (the lightning bolt) in the lower left corner of Packet Tracer.
+2. Select the light blue **Console** cable.
+3. Click **PC1** and connect the cable to the **RS-232** port.
+4. Drag the other end to **S1** and select the **Console** port.
+
+**Step 2: Establish a terminal session with S1**
+1. Click **PC1** > **Desktop** tab > **Terminal**.
+2. Verify the default Port Configuration settings (note the bits per second setting) and click **OK**.
+3. When you see the *Press RETURN to get started!* message, press Enter. Note the prompt that appears.
+
+**Step 3: Explore the IOS Help**
+1. At the User EXEC prompt, type `?` to list the available commands:
+   ```
+   S1> ?
+   ```
+   Note which command begins with the letter `C`.
+2. Type `t?` and then `te?` to see how the list narrows:
+   ```
+   S1> t?
+   S1> te?
+   ```
+   This is **context-sensitive help**: it gives more information as the command is expanded.
+
+### Part 2: Explore EXEC modes
+
+**Step 1: Enter privileged EXEC mode**
+1. Type `?` and look at the information shown for the `enable` command.
+2. Type `en` and press **Tab** to see command completion (the full `enable` command is displayed).
+3. Enter `enable` and press Enter, and observe how the prompt changes (`S1>` becomes `S1#`).
+4. Type `?` again and count the commands displayed now that privileged EXEC mode is active (hint: type `c?` to list only commands beginning with `C`).
+
+**Step 2: Enter global configuration mode**
+1. At the privileged EXEC prompt, enter:
+   ```
+   S1# configure
+   ```
+2. Press Enter to accept the default parameter `[terminal]` and observe how the prompt changes (`S1(config)#`).
+3. This is global configuration mode. Return to privileged EXEC mode with `end`, `exit`, or `Ctrl+Z`:
+   ```
+   S1(config)# exit
+   S1#
+   ```
+
+### Part 3: Set the clock
+
+**Step 1: Use the `clock` command**
+1. Display the current clock settings:
+   ```
+   S1# show clock
+   ```
+2. Use context-sensitive help to learn the syntax of `clock`:
+   ```
+   S1# clock<ENTER>
+   S1# clock ?
+   S1# clock set ?
+   ```
+   The `% Incomplete command` message means more parameters are required.
+3. Set the time to 3:00 p.m. using the 24-hour format, then use `?` to see the remaining parameters:
+   ```
+   S1# clock set 15:00:00 ?
+   ```
+4. Set the date to 01/31/2035 in the requested format, then check it:
+   ```
+   S1# show clock
+   *15:0:4.869 UTC Wed Jan 31 2035
+   ```
+   If that does not work, use the full command:
+   ```
+   S1# clock set 15:00:00 31 Jan 2035
+   ```
+
+**Step 2: Explore additional command messages**
+Issue each of the following and record the message IOS returns:
+```
+S1# cl<enter>
+S1# clock
+S1# clock set 25:00:00
+S1# clock set 15:00:00 32
+```
+
+## Command Summary
+
+| Command | Purpose |
+|---|---|
+| `?` | List the commands available at the current prompt |
+| `t?` / `te?` | Context-sensitive help for commands starting with those letters |
+| `<partial command><Tab>` | Complete a partial command |
+| `enable` | Move from User EXEC to privileged EXEC mode |
+| `configure terminal` | Enter global configuration mode |
+| `end`, `exit`, `Ctrl+Z` | Leave configuration mode |
+| `show clock` | Display the device clock |
+| `clock set <hh:mm:ss> <day> <month> <year>` | Set the device clock |
+
+## Key Takeaways
+
+- The IOS prompt tells you which mode you are in: `S1>` is User EXEC, `S1#` is privileged EXEC, and `S1(config)#` is global configuration.
+- `?` and Tab completion speed up work and help you learn command syntax.
+- IOS error messages such as `% Incomplete command` and invalid input errors tell you what is wrong with a command and where.
+- The clock must be set manually on devices that have no time source configured.
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── Navigate the IOS.pka
+```
+
+## Author
+Nethmini Umendra
+
+## Acknowledgements
+Activity based on Cisco Networking Academy Packet Tracer materials.
