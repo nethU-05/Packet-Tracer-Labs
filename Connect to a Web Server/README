@@ -1,1 +1,69 @@
+# Packet Tracer Lab: Connect to a Web Server
 
+A Cisco Packet Tracer activity that shows how packets are sent across the Internet using IP addresses, by verifying connectivity to a web server and then opening its web page from a client PC.
+
+## Objective
+
+Observe how packets are sent across the Internet using IP addresses.
+
+## Topology
+
+| Device | Role | IP Address |
+|---|---|---|
+| PC0 | Source host / web client | n/a |
+| Web server | Destination | 172.33.100.50 |
+
+## Requirements
+
+- Cisco Packet Tracer
+- The activity file in this repository
+
+## Lab Walkthrough
+
+### Part 1: Verify connectivity to the web server
+
+1. Select **PC0**, then open the **Desktop** tab > **Command Prompt**.
+2. Ping the web server's IP address:
+   ```
+   PC> ping 172.33.100.50
+   ```
+   A reply verifies connectivity from the client to the destination web server. The first reply may time out while devices load and ARP is performed. Example output:
+   ```
+   Pinging 172.33.100.50 with 32 bytes of data:
+
+   Reply from 172.33.100.50: bytes=32 time=0ms TTL=127
+   Reply from 172.33.100.50: bytes=32 time=0ms TTL=127
+   Reply from 172.33.100.50: bytes=32 time=0ms TTL=127
+
+   Ping statistics for 172.33.100.50:
+       Packets: Sent = 4, Received = 3, Lost = 1 (25% loss)
+   ```
+3. Close the Command Prompt window only (click the **x** in that window) and leave the PC0 configuration window open.
+
+### Part 2: Connect to the web server via the web client
+
+1. On PC0's **Desktop** tab, open **Web Browser**.
+2. Enter `172.33.100.50` in the URL box and click **Go**. The browser connects to the web server by IP address and opens the web page.
+3. Note any messages shown after the page finishes loading.
+
+## Key Takeaways
+
+- `ping` confirms IP reachability between a client and a server.
+- The first ping can be lost while ARP resolves the next hop's MAC address, which is why 3 of 4 replies is normal here.
+- A web client can reach a server directly by IP address, with no DNS name needed.
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── <activity-file>.pka     # Packet Tracer activity file
+```
+
+## Author
+
+Your Name
+
+## Acknowledgements
+
+Activity based on Cisco Networking Academy Packet Tracer materials.
