@@ -1,0 +1,59 @@
+# Packet Tracer Lab: Identify MAC and IP Addresses
+
+A Cisco Packet Tracer activity that uses a ping between two PCs on different networks to observe how MAC and IP addresses are used, and to identify the MAC address of a PC's default gateway.
+
+## Objective
+
+Perform a `ping` from PC0 to PC1 and identify the MAC address of the default gateway for PC0.
+
+## Topology
+
+```
+PC0 --- Switch0 (2950-24) --- Router0 (1841) --- Switch1 (2950-24) --- PC1
+```
+
+| Device | Model | Role |
+|---|---|---|
+| PC0 | PC-PT | Source host |
+| Switch0 | 2950-24 | Switch for PC0's network |
+| Router0 | 1841 | Default gateway between the two networks |
+| Switch1 | 2950-24 | Switch for PC1's network |
+| PC1 | PC-PT | Destination host |
+
+## How to Open This Activity
+
+1. Install Cisco Packet Tracer.
+2. Open `Identify MAC and IP Addresses.pka`.
+3. Follow the instructions panel, using **Simulation mode** for the capture steps.
+
+## Lab Walkthrough
+
+1. Open PC0 and go to **Desktop** > **Command Prompt**.
+2. Ping PC1 from PC0:
+   ```
+   PC> ping <PC1 IP address>
+   ```
+3. Identify the MAC address of the default gateway for PC0 (the Router0 interface connected to PC0's network). You can find it using Simulation mode and the PDU Information window, or by checking the ARP table with `arp -a`.
+4. Return to the multiple-choice question in the activity and select your answer.
+
+## Key Takeaways
+
+- When a host sends traffic to a device on another network, the destination **IP** address is that of the final host, but the destination **MAC** address is that of the **default gateway**.
+- MAC addresses change at every hop, while source and destination IP addresses stay the same end to end.
+- ARP is used to learn the MAC address that matches a known IP address on the local network.
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── Identify MAC and IP Addresses.pka
+```
+
+## Author
+
+Nethmini Umendra
+
+## Acknowledgements
+
+Activity based on Cisco Networking Academy Packet Tracer materials.
