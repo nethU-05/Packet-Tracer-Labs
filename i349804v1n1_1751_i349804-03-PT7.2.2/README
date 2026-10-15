@@ -53,9 +53,11 @@ Six PCs (PC0 to PC5) are connected to a single switch, **Switch0**, in a star la
 └── <activity-file>.pka     # Packet Tracer activity file
 ```
 
-## Author
-
+Author
 Nethmini Umendra
 
-## Acknowledgements
-Activity based on Cisco Networking Academy Packet Tracer materials.
+Acknowledgements
+Activity based on Cisco Networking Academy Packet Tracer materials
+
+License
+This repository is for educational purposes. Packet Tracer and the original activity are property of Cisco Systems, Inc.
