@@ -67,7 +67,6 @@ Repository Structure
 .
 ├── Identify MAC and IP Addresses.pka   # Packet Tracer activity file
 ├── README.md                           # This file
-└── screenshots/                        # (optional) screenshots of captured PDUs
 
 Author
 Nethmini Umendra 
