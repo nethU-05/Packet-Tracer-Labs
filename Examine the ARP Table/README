@@ -101,8 +101,8 @@ The devices are already configured. You gather PDU information in Simulation mod
 
 ```
 .
-├── README.md
-└── Examine the ARP Table.pka
+├── Examine the ARP Table.pka
+└── README.md
 ```
 
 Author
