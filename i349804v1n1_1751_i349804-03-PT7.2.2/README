@@ -1,0 +1,61 @@
+# Packet Tracer Lab: View the Switch MAC Address Table
+
+A Cisco Packet Tracer activity that uses a single switch connected to six PCs to see how a switch learns MAC addresses and uses its MAC address table to forward frames.
+
+## Objective
+
+Determine the IPv4 and MAC addresses of PC0, generate traffic with a ping, and examine Switch0's MAC address table to find which port is used to reach another host.
+
+## Topology
+
+Six PCs (PC0 to PC5) are connected to a single switch, **Switch0**, in a star layout.
+
+| Device | Role |
+|---|---|
+| PC0 | Source host |
+| PC1 to PC5 | Other hosts on the same LAN (the ping target is `10.1.1.5`) |
+| Switch0 | Learns MAC addresses and forwards frames |
+
+## Requirements
+
+- Cisco Packet Tracer
+- The activity file in this repository
+
+## Lab Walkthrough
+
+1. Open the **PC0** desktop.
+2. Use the **Command Prompt** to determine the IPv4 address and MAC address of PC0:
+   ```
+   PC> ipconfig /all
+   ```
+3. From the PC0 Command Prompt, ping the IPv4 address `10.1.1.5`:
+   ```
+   PC> ping 10.1.1.5
+   ```
+4. Use the **Terminal** application on PC0 to access Switch0 and examine its MAC address table:
+   ```
+   Switch> show mac address-table
+   ```
+5. Find the entry for the host with IPv4 address `10.1.1.5` and note which Switch0 port is used to send frames to it.
+6. Return to the assessment and answer the question: *Which port does Switch0 use to send frames to the host with the IPv4 address 10.1.1.5?*
+
+## Key Takeaways
+
+- A switch builds its MAC address table by recording the source MAC address of each frame against the port it arrived on.
+- Frames are forwarded out only the port that matches the destination MAC address, rather than flooded to every port.
+- Pinging a host first generates the traffic that lets the switch learn its MAC address.
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── <activity-file>.pka     # Packet Tracer activity file
+```
+
+## Author
+
+Nethmini Umendra
+
+## Acknowledgements
+Activity based on Cisco Networking Academy Packet Tracer materials.
