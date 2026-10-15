@@ -1,1 +1,81 @@
+# Packet Tracer Lab: The Client Interaction
 
+A Cisco Packet Tracer activity that uses Simulation mode to track the traffic between a PC and a server when a web page is requested.
+
+## Objective
+
+Observe the client interaction between the server and PC.
+
+## Background
+
+Clients such as desktop PCs request services from servers. Packet Tracer lets you add simulated servers that support DHCP, DNS, HTTP, and TFTP, as well as simulated PCs that request those services.
+
+This activity uses a simple network: a PC connected directly to a server that provides DNS services and hosts a web page through an HTTP server. It tracks the flow of traffic that happens when a web page is requested, how the IP address is resolved, and how the web page is delivered.
+
+## Topology
+
+| Device | Role |
+|---|---|
+| PC | Client that requests `www.example.com` |
+| Server | DNS server and HTTP (web) server |
+
+## Requirements
+
+- Cisco Packet Tracer
+- The activity file in this repository
+
+## Lab Walkthrough
+
+### Part 1: Enter simulation mode
+Packet Tracer starts in realtime mode. Click the **Simulation Mode** icon in the bottom right of the logical workspace.
+
+### Part 2: Set event list filters
+By default, simulation mode captures all events. Filter to DNS and HTTP only:
+1. In **Event List Filters**, click **Show All/None** to clear all checks.
+2. Click **Edit Filters**. Under the **IPv4** tab select **DNS**; under the **Misc** tab select **HTTP**. Close the window.
+
+The Event List Filters now show only DNS and HTTP events.
+
+### Part 3: Request a web page from the PC
+1. Click **PC** > **Desktop** tab > **Web Browser**.
+2. Type `www.example.com` in the URL box and click **Go**.
+3. Minimize the PC window.
+
+### Part 4: Run the simulation
+1. In **Play Controls** of the Simulation Panel, click **Play**. The exchange is animated and events are added to the Event List. They represent:
+   - the PC's request to resolve the URL to an IP address
+   - the server's reply with the IP address
+   - the PC's request for the web page
+   - the server sending the web page in two segments
+   - the PC acknowledging the web page
+2. Click **View Previous Event** when the buffer is full.
+
+### Part 5: Access a specific PDU
+1. Restore the PC window and notice the web page displayed in the browser, then minimize it.
+2. In the **Event List**, click the colored box in the last column of the first row to open the **PDU Information** window for the first event.
+
+### Part 6: Examine the PDU Information window
+1. On the first tab, review the inbound and/or outbound PDU as it relates to the OSI model. Click **Next Layer >>** repeatedly to cycle through the layers and read the description for each.
+2. Examine the PDU information for the other events to understand the whole exchange.
+
+## Key Takeaways
+
+- The PC first uses DNS to resolve the URL to an IP address, then uses HTTP to request the page.
+- Each event can be inspected layer by layer through the OSI model in the PDU Information window.
+- Event filters keep the capture focused on the protocols you care about (DNS and HTTP).
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── <activity-file>.pka     # Packet Tracer activity file
+```
+
+## Author
+
+Nethmini Umendra
+
+## Acknowledgements
+
+Activity based on Cisco Networking Academy Packet Tracer materials.
