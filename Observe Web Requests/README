@@ -69,12 +69,10 @@ View the client/server traffic sent from a PC to a web server when requesting we
 └── <activity-file>.pka     # Packet Tracer activity file
 ```
 
-## Author
-
+Author
 Nethmini Umendra
 
-## Acknowledgements
-
+Acknowledgements
 Activity based on Cisco Networking Academy Packet Tracer materials.
 
 License
