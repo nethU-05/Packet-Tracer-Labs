@@ -1,5 +1,8 @@
 # Packet-Tracer-Labs
 My Cisco Packet Tracer networking and security labs.
+## How to Use This Repository
+This repository contains the Cisco Packet Tracer activities I have completed. Follow these steps to download and open them.
+
  ## Labs
    - 01 - Observe Traffic Flow in a Routed Network
    - 02 - Identity MAC and IP Addresses
@@ -9,3 +12,4 @@ My Cisco Packet Tracer networking and security labs.
    - 06 - Use FTP Services
    - 07 - The Client Interaction
    - 08 - Connect to a Web Server
+   - 09 - Create a Simple Network 
