@@ -1,1 +1,51 @@
+# Packet Tracer Lab: Use the ipconfig Command
 
+A Cisco Packet Tracer activity that uses the `ipconfig /all` command to find an incorrectly configured PC on a small office network and fix it.
+
+## Objective
+
+Use the `ipconfig` command to identify incorrect configuration on a PC.
+
+## Background / Scenario
+
+A small business owner cannot connect to the Internet from one of the four PCs in the office. All the PCs are configured with static IP addressing on the `192.168.1.0 /24` network, and all of them should be able to reach the `www.cisco.pka` web server. The `ipconfig /all` command is used to identify which PC is misconfigured.
+
+## Requirements
+
+- Cisco Packet Tracer
+- The activity file in this repository
+
+## Lab Walkthrough
+
+### Part 1: Verify configurations
+1. Open the **Command Prompt** on each PC and run:
+   ```
+   C:\> ipconfig /all
+   ```
+2. Examine the IP address, subnet mask, and default gateway on each PC. Record the configuration of every PC so you can compare them and spot the one that does not match the others.
+
+### Part 2: Correct any misconfigurations
+1. Select the PC that is incorrectly configured.
+2. Open the **Desktop** tab > **IP Configuration** and correct the misconfigured setting.
+3. Click **Check Results** to confirm the activity shows 100% completion.
+
+## Key Takeaways
+
+- `ipconfig /all` shows the IP address, subnet mask, default gateway, and DNS settings of a host.
+- On a shared `/24` network, every PC should share the same network portion, subnet mask, and default gateway, with a unique host address.
+- Comparing the configuration of working and non-working PCs is a quick way to find a misconfiguration.
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── <activity-file>.pka     # Packet Tracer activity file
+```
+
+## Author
+Nethmini Umendra
+
+## Acknowledgements
+
+Activity based on Cisco Networking Academy Packet Tracer materials.
