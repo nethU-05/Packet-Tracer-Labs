@@ -1,1 +1,78 @@
+# Packet Tracer Lab: Observe Client/Server Web Traffic (HTTP)
 
+A Cisco Packet Tracer activity that shows the traffic a PC sends to a web server when it requests web services. It covers DNS name resolution, loading a web page in a browser, viewing the server's HTML source, and capturing the resulting TCP/HTTP packets in Simulation mode.
+
+## Objective
+
+View the client/server traffic sent from a PC to a web server when requesting web services.
+
+## Topology
+
+| Device | Role |
+|---|---|
+| External Client | PC that sends requests to the web server |
+| ciscolearn.web.com | Web server hosting `index.html` |
+| DNS server | Resolves `ciscolearn.web.com` to an IP address |
+
+## Requirements
+
+- Cisco Packet Tracer (version used by your course)
+- The activity file (`.pka` / `.pkt`) in this repository
+
+## Lab Walkthrough
+
+### Part 1: Verify connectivity to the web server
+1. Click **External Client** and open **Command Prompt** from the **Desktop** tab.
+2. Ping the server by URL:
+   ```
+   PC> ping ciscolearn.web.com
+   ```
+   The IP address in the reply was obtained from the DNS server and resolves to the domain name. All forwarded traffic uses source and destination IP addresses.
+3. Close the Command Prompt but leave the External Client window open.
+
+### Part 2: Connect to the web server
+1. From the Desktop, open **Web Browser**.
+2. Enter `ciscolearn.web.com` in the URL box and read the page that loads.
+3. Minimize (do not close) the External Client window.
+
+### Part 3: View the HTML code
+1. In the Logical topology, click the **ciscolearn.web.com** server.
+2. Go to **Services > HTTP**, then click **(edit)** next to `index.html`.
+3. Compare the HTML markup on the server with the page displayed in the client's browser (re-maximize the External Client window if needed).
+4. Close both the External Client and web server windows.
+
+### Part 4: Observe traffic between the client and the web server
+1. Switch to **Simulation** mode (lower right corner).
+2. Double-click the Simulation Panel to unlock it from the PT window so the whole topology is visible.
+3. Under **Edit Filters > Misc**, make sure only **TCP** and **HTTP** are selected.
+4. Add a **Complex PDU** (open envelope icon above the Simulation mode icon) and click **External Client** as the source.
+5. In the **Create Complex PDU** window, set:
+   - **Application:** HTTP
+   - **Destination:** the `ciscolearn.web.com` server (its IP appears in the destination box)
+   - **Starting Source Port:** `1000`
+   - **Simulation Settings:** Periodic Interval, `120` seconds
+6. Click **Create PDU**.
+7. Click **Play** in the Simulation Panel (speed up with the play control slider). If the **Buffer Full** window appears, click **View Previous Events**.
+8. Scroll through the **Event List** and note the number of packets that traveled from source to destination.
+
+## Key Takeaways
+
+- DNS resolves a domain name to the IP address used for forwarding traffic.
+- HTTP runs over TCP, which requires connection establishment and acknowledgment of received packets.
+- This handshaking and acknowledgment adds considerable traffic overhead.
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── <activity-file>.pka     # Packet Tracer activity file
+```
+
+## Author
+
+Nethmini Umendra
+
+## Acknowledgements
+
+Activity based on Cisco Networking Academy Packet Tracer materials.
