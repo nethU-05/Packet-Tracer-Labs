@@ -63,11 +63,6 @@ IP addresses remain the same from original source to final destination.
 For local traffic, the destination MAC is the target host; for remote traffic, it is the default gateway's MAC.
 Simulation mode is a powerful way to see encapsulation and addressing at each step.
 
-How to Open This Activity
-Install Cisco Packet Tracer.
-Open Identify MAC and IP Addresses.pka.
-Follow the instructions panel, using Simulation mode for the capture steps.
-
 Repository Structure
 .
 ├── Identify MAC and IP Addresses.pka   # Packet Tracer activity file
