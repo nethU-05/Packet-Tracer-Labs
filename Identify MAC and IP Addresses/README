@@ -56,11 +56,7 @@ Sample table – echo request
 
 At Device	Src MAC	Dest. MAC	Src IPv4	Dest IPv4
 172.16.31.3	00D0:D311:C788	00D0:BA8E:741A	172.16.31.3	10.10.10.2
-(add remaining hops)				
-
-Echo reply table – recorded the same way, hop by hop, starting from 10.10.10.2.
-
-
+		
 Key Takeaways
 MAC addresses change at every Layer 2 hop (host → router → next network).
 IP addresses remain the same from original source to final destination.
