@@ -1,1 +1,100 @@
+# Packet Tracer Lab: Use FTP Services
 
+A Cisco Packet Tracer activity that practices transferring files between a PC and an FTP server using the command-line FTP client.
+
+## Objectives
+
+- Upload a file to an FTP server.
+- Download a file from an FTP server.
+
+## Background
+
+File Transfer Protocol (FTP) is a commonly used application for transferring files between clients and servers on a network. The server runs a service that clients connect to, log in to, and use to transfer files. FTP uses **port 21** as the server command port to create the connection, then **port 20** for data transfer.
+
+## Addressing Table
+
+| Device | Interface | IP Address | Subnet Mask |
+|---|---|---|---|
+| FTP Server (`ftp.pka`) | NIC | 209.165.200.226 | 255.255.255.224 |
+
+## Requirements
+
+- Cisco Packet Tracer
+- The activity file in this repository
+- Lab credentials: username `student`, password `class`
+
+## Lab Walkthrough
+
+### Part 1: Upload a file to an FTP server
+
+**Step 1: Locate the file**
+1. Click **PC-A** > **Desktop** > **Command Prompt**.
+2. Enter `?` to list available commands.
+3. Enter `dir` and confirm `sampleFile.txt` is in the `C:\` directory.
+
+**Step 2: Connect to the FTP server**
+1. Connect to the server by IP address or name:
+   ```
+   C:\> ftp 209.165.200.226
+   ```
+2. Log in with username `student` and password `class`.
+
+**Step 3: Upload the file**
+1. Enter `?` to see the commands available in the FTP client (`cd`, `delete`, `dir`, `get`, `help`, `passive`, `put`, `pwd`, `quit`, `rename`).
+2. Enter `dir` to list the files on the server.
+3. Upload the file:
+   ```
+   ftp> put sampleFile.txt
+   ```
+4. Run `dir` again to verify the upload.
+
+### Part 2: Download a file from an FTP server
+
+**Step 1: Rename the file on the server**
+```
+ftp> rename sampleFile.txt sampleFile_FTP.txt
+```
+Run `dir` to verify the rename.
+
+**Step 2: Download the file**
+```
+ftp> get sampleFile_FTP.txt
+ftp> quit
+```
+Run `dir` on the PC to confirm the downloaded file is in the directory.
+
+**Step 3: Delete the file from the FTP server**
+1. Log in to the FTP server again.
+2. Delete the file:
+   ```
+   ftp> delete sampleFile_FTP.txt
+   ```
+3. Enter `quit` to exit the FTP client.
+
+## FTP Command Summary
+
+| Command | Purpose |
+|---|---|
+| `ftp <ip>` | Connect to an FTP server |
+| `dir` | List files |
+| `put <file>` | Upload a file to the server |
+| `get <file>` | Download a file from the server |
+| `rename <old> <new>` | Rename a file on the server |
+| `delete <file>` | Delete a file on the server |
+| `quit` | Exit the FTP client |
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── <activity-file>.pka     # Packet Tracer activity file
+```
+
+## Author
+
+Nethmini Umendra
+
+## Acknowledgements
+
+Activity based on Cisco Networking Academy Packet Tracer materials.
