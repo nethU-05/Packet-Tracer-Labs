@@ -65,8 +65,8 @@ View the client/server traffic sent from a PC to a web server when requesting we
 
 ```
 .
-├── README.md
-└── <activity-file>.pka     # Packet Tracer activity file
+├── <activity-file>.pka     # Packet Tracer activity file
+└── README.md
 ```
 
 Author
