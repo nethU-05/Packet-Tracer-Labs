@@ -91,12 +91,15 @@ After verifying connectivity to `cisco.srv`, run `ipconfig` on each device and f
 
 ```
 .
-├── README.md
-└── Create a Simple Network.pka
+├── Create a Simple Network.pka
+└── README.md 
 ```
 
-## Author
+Author
 Nethmini Umendra
 
-## Acknowledgements
+Acknowledgements
 Activity based on Cisco Networking Academy Packet Tracer materials.
+
+License
+This repository is for educational purposes. Packet Tracer and the original activity are property of Cisco Systems, Inc.
