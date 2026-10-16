@@ -1,0 +1,113 @@
+# Packet Tracer Lab: Configure a Wireless Router and Clients
+
+A Cisco Packet Tracer activity set in a friend's home, where you connect a cable modem, a home wireless router, and several clients, then configure the router's DHCP, administration, and wireless LAN settings and test internet connectivity.
+
+## Objectives
+
+- **Part 1:** Connect the devices
+- **Part 2:** Configure the wireless router
+- **Part 3:** Configure IP addressing and test connectivity
+
+## Background / Scenario
+
+Natsumi has just got a new home connection to the cable TV network. You connect the correct cables to the correct devices, connect devices to a home wireless router, configure the router to hand out IP addresses to network clients, and set up a wireless LAN for her home network.
+
+## Topology
+
+The Physical view shows the interior of the house (Bedroom, Office, and Living Room).
+
+| Device | Location | Role |
+|---|---|---|
+| Cable Splitter | Wall outlet | Splits the coaxial feed into internet and TV |
+| Cable Modem | Office | Provides the internet connection from the cable provider |
+| TV | Living room | Receives the video service |
+| Home Wireless Router | Office | Center of the network: DHCP, switch ports, and Wi-Fi |
+| Office PC | Office | Wired PC used to configure the router |
+| Bedroom PC | Bedroom | Wired PC |
+| Laptop | Living room | Wireless client |
+| Internet / `skillsforall.srv` | Cloud | Web server used to test connectivity |
+
+## Requirements
+
+- Cisco Packet Tracer
+- `Configure a Wireless Router and Client.pka` (in this repository)
+
+## Lab Walkthrough
+
+### Part 1: Connect the devices
+
+**Step 1: Connect the coaxial cables**
+1. In Network Components, click **Connections** and select the **Coaxial** cable (blue zigzag icon).
+2. Connect the **Cable Splitter** (`Coaxial1`) to the **Cable Modem** (`Port 0`).
+3. Connect the **Cable Splitter** (`Coaxial2`) to **Port 0** on the **TV**.
+4. Click the **TV** and turn **Status** to **ON**. A TV program image confirms the connection.
+
+**Step 2: Connect the network cables**
+Use the **Copper Straight-Through** cable:
+1. **Cable Modem** `Port 1` to the **Internet** port on the **Home Wireless Router**.
+2. **Office PC** `FastEthernet0` to **GigabitEthernet 1** on the Home Wireless Router.
+3. **Bedroom PC** `FastEthernet0` to **GigabitEthernet 2** on the Home Wireless Router.
+
+### Part 2: Configure the wireless router
+
+**Step 1: Access the home wireless router GUI**
+1. Click **Office PC** > **Desktop** > **IP Configuration** and select **DHCP**. The IPv4 address should start with `192` (use **Fast Forward Time** if needed).
+2. Note the **default gateway** address, which is the Home Wireless Router's address.
+3. Close IP Configuration, open **Web Browser**, enter the default gateway address, and click **Go**.
+4. Log in with the default credentials: `admin` for both the user name and password. Default passwords on real devices should be changed immediately.
+
+**Step 2: Configure basic settings**
+1. On the **Setup** tab, in **Network Setup**, set **Maximum Number of Users** to `10`. Scroll down and click **Save Settings** (save on every page you change).
+2. On the **Administration** tab, change the router password to `MyPassword1!`, confirm it, and click **Save Settings**. Log in again as `admin` with the new password.
+
+> If you lose the connection after saving, toggle the Office PC between **DHCP** and **Static** in IP Configuration, confirm it has a `192` address, and log back in.
+
+**Step 3: Configure a wireless LAN**
+1. Open the **Wireless** tab. For the **2.4 GHz** network, click **Enable**.
+2. Change the **Network Name (SSID)** from `Default` to `MyHome` and save.
+3. Open **Wireless Security** (under the Wireless tab). Security is disabled by default.
+4. For the **2.4 GHz** network, select **WPA2 Personal** (the strongest option this router offers).
+5. Enter the passphrase `MyPassPhrase1!` (capitalization matters).
+6. Click **Save Settings** and close the Web Browser.
+
+### Part 3: Configure IP addressing and test connectivity
+
+**Step 1: Connect the laptop to the wireless network**
+1. Click **Laptop** in the living room > **Desktop** > **PC Wireless**.
+2. On the **Connect** tab, select the `MyHome` network and click **Connect**.
+3. Enter the passphrase in the **Pre-shared Key** field and click **Connect**.
+4. On the **Link Information** tab, confirm the message *You have successfully connected to the access point*.
+5. Click **More Information** and check the IP address starts with `192` (use **Fast Forward Time** if needed).
+6. Close PC Wireless, open **Web Browser**, and load `skillsforall.srv` to verify the laptop has internet access.
+
+**Step 2: Test connectivity from the Office PC**
+1. Click **Office PC** > **Desktop** > **Web Browser**.
+2. Enter `skillsforall.srv` and click **Go**. Loading the page confirms internet connectivity for the wired network.
+
+**Step 3: Configure the Bedroom PC**
+1. On the **Bedroom PC**, open **IP Configuration**, select **DHCP**, and verify the address starts with `192`.
+2. Open the **Web Browser** and load `skillsforall.srv` to verify internet connectivity.
+
+All devices should now be able to reach the internet.
+
+## Key Takeaways
+
+- A cable splitter separates the internet data service from the video service on the same coaxial line.
+- A home wireless router combines a switch, a wireless access point, and a DHCP server.
+- Default credentials (`admin` / `admin`) should be changed right away, and the router's DHCP pool can be limited to the number of devices you expect.
+- WPA2 Personal with a strong passphrase secures the wireless LAN against unauthorized access.
+- Settings must be saved on each page of the router GUI, and a quick `DHCP`/`Static` toggle can refresh a PC's addressing after a change.
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── Configure a Wireless Router and Client.pka
+```
+
+Author
+Nethmini Umendra
+
+Acknowledgements
+Activity based on Cisco Networking Academy Packet Tracer materials.
