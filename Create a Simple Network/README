@@ -1,0 +1,102 @@
+# Packet Tracer Lab: Create a Simple Network
+
+A Cisco Packet Tracer activity that builds a simple home-style network in the Logical Workspace: a PC, a wireless laptop, a wireless router, and a cable modem connected to the Internet, then verifies connectivity to a web server.
+
+## Objectives
+
+- **Part 1:** Build a simple network
+- **Part 2:** Configure the end devices and verify connectivity
+
+## Topology
+
+| Device | Role |
+|---|---|
+| PC | Wired end device connected to the wireless router |
+| Laptop | Wireless end device (connects to the `HomeNetwork` Wi-Fi) |
+| Wireless Router | Provides DHCP, Wi-Fi, and is the default gateway |
+| Cable Modem | Converts the ISP coaxial connection to Ethernet for the local network |
+| Internet | Cloud representing the ISP / Internet |
+| cisco.srv | Web server used to test connectivity |
+
+## Requirements
+
+- Cisco Packet Tracer
+- `Create a Simple Network.pka` (in this repository)
+
+## Lab Walkthrough
+
+### Part 1: Build a simple network
+
+**Step 1: Add network devices to the workspace**
+Using the Device-Type Selection Box, add:
+- **PC:** End Devices > End Devices > PC
+- **Laptop:** End Devices > End Devices > Laptop
+- **Cable Modem:** Network Devices > WAN Emulation > Cable Modem
+
+A cable modem lets your network communicate with an Internet Service Provider (ISP). The coaxial cable from the ISP connects to the cable modem, and an Ethernet cable connects it to the local network.
+
+**Step 2: Change the display names**
+Click each device icon, open the **Config** tab, and enter the new name in the **Display Name** field: `PC`, `Laptop`, and `Cable Modem`.
+
+**Step 3: Add the physical cabling**
+Using **Connections** (lightning bolt icon):
+1. **PC to wireless router:** copper straight-through cable from **FastEthernet0** on the PC to **Ethernet 1** on the wireless router.
+2. **Wireless router to cable modem:** copper straight-through cable from the **Internet** interface of the wireless router to **Port 1** on the cable modem.
+3. **Cable modem to Internet cloud:** coaxial cable from **Port 0** on the cable modem to **Coaxial 7** on the Internet cloud.
+
+### Part 2: Configure the end devices and verify connectivity
+
+Each end device receives an IP address from the wireless router's DHCP service. DHCP (Dynamic Host Configuration Protocol) assigns IP addresses to devices dynamically.
+
+**Step 1: Configure the PC**
+1. Click the **PC** > **Desktop** tab > **IP Configuration**. Verify DHCP is enabled and the PC received an IP address (select **DHCP** if no address shows).
+2. Close IP Configuration, open the **Command Prompt**, and run:
+   ```
+   C:\> ipconfig /all
+   ```
+   The PC should have an IPv4 address in the `192.168.0.x` range.
+3. Test connectivity to the server (it may take a few seconds). Four replies should be received:
+   ```
+   C:\> ping cisco.srv
+   ```
+
+**Step 2: Configure the Laptop**
+1. Click **Laptop** > **Physical** tab.
+2. Power off the laptop, drag out the Ethernet copper module into the **MODULES** pane, install the wireless **WPC300N** module in the empty port, then power the laptop back on.
+3. Go to the **Desktop** tab and open **PC Wireless**.
+4. Select **Connect**, click **Refresh** if needed, choose **HomeNetwork**, and click **Connect**.
+5. Close PC Wireless, open **Web Browser**, and navigate to `cisco.srv`.
+
+## Reflection
+
+After verifying connectivity to `cisco.srv`, run `ipconfig` on each device and fill in the addressing table.
+
+| Device | IPv4 Address | Subnet Mask | Default Gateway |
+|---|---|---|---|
+| PC | | | |
+| Laptop | | | |
+
+- End-device IP addresses range from `192.168.0.2` to `192.168.0.254`, and each NIC gets a unique address on the same network.
+- The **subnet mask** separates the network portion of an address (`192.168.0`, like a street name) from the host portion (like a house number).
+- The **default gateway** is the wireless router. Traffic leaving the `192.168.0` network goes to the router, then to the cable modem, and on to the ISP.
+
+## Key Takeaways
+
+- A cable modem connects a local network to an ISP over coaxial cable.
+- DHCP on the wireless router gives end devices their IP address, subnet mask, and default gateway automatically.
+- Wired devices use a straight-through Ethernet cable; wireless devices need a wireless NIC module and the correct SSID.
+- `ipconfig /all` and `ping` verify addressing and connectivity.
+
+## Repository Structure
+
+```
+.
+├── README.md
+└── Create a Simple Network.pka
+```
+
+## Author
+Nethmini Umendra
+
+## Acknowledgements
+Activity based on Cisco Networking Academy Packet Tracer materials.
